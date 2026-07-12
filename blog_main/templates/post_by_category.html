@@ -1,0 +1,88 @@
+{% extends 'base.html'%}
+
+
+  {% block content %}
+   {% if featured_post %}
+<div class="jumbotron p-5 text-white rounded"
+     style="
+        background-image: url('{{ featured_post.featured_image.url }}');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        min-height: 450px;
+     ">
+
+    <div class="col-md-6">
+        <h1 class="display-4 font-italic">
+            {{ featured_post.title }}
+        </h1>
+
+        <p class="lead my-3">
+            {{ featured_post.short_description }}
+        </p>
+
+        <p class="lead mb-0">
+           <a href="#" class="btn btn-warning btn-lg">
+    Read More
+</a>
+        </p>
+    </div>
+
+</div>
+{% endif %}
+
+<!-- featured posts -->
+    <!-- Blog Cards -->
+     <h3 class="text-uppercase text-warning" style="letter-spacing: 2px;">category-{{category}}</h3>
+    <div class="row mb-2">
+      {% for post in posts %}
+
+<div class="card mb-4 shadow-sm">
+    <div class="row no-gutters">
+
+        <div class="col-md-4">
+            <img src="{{ post.featured_image.url }}"
+                 class="img-fluid h-100 w-100"
+                 style="object-fit: cover;"
+                 alt="{{ post.title }}">
+        </div>
+
+        <div class="col-md-8">
+            <div class="card-body">
+
+                <span class="badge badge-warning">
+                    {{ post.category }}
+                </span>
+
+                <h3>{{ post.title }}</h3>
+
+                <small class="text-muted">
+                    {{ post.created_at|timesince }} ago |
+                    {{ post.author }}
+                </small>
+
+                <p class="mt-2">
+                    {{ post.short_description }}
+                </p>
+
+                <a href="#" class="btn btn-warning btn-sm">
+                    Read More
+                </a>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% empty %}
+
+<p class="text-center">No posts found.</p>
+
+{% endfor %}
+
+
+
+</div>
+
+{% endblock %}
