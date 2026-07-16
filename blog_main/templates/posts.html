@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="row">
+
+        <!-- Sidebar -->
+        <div class="col-md-3 dashboard-sidebar">
+
+            <div class="list-group">
+
+                <a href="{% url 'dashboard' %}" class="list-group-item">
+                    Dashboard
+                </a>
+
+                <a href="{% url 'categories' %}" class="list-group-item">
+                    Categories
+                </a>
+
+                <a href="{% url 'posts' %}" class="list-group-item active">
+                    Posts
+                </a>
+
+                <a href="{% url 'logout' %}" class="list-group-item text-danger">
+                    Logout
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-md-9">
+
+            <div class="card">
+
+                <div class="card-header d-flex justify-content-between align-items-center">
+
+                    <h3 class="mb-0">All Posts</h3>
+
+                   <a href="{% url 'add_post' %}" class="btn btn-dark">
+    Add New
+</a>
+
+                </div>
+
+                <div class="card-body">
+
+                    <table class="table table-bordered table-hover">
+
+                        <thead class="thead-light">
+
+                            <tr>
+                                <th>#</th>
+                                <th>Title</th>
+                                <th>Category</th>
+                                <th>Author</th>
+                                <th>Status</th>
+                                <th>Featured</th>
+                                <th>Action</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            {% for post in posts %}
+
+                            <tr>
+
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ post.title }}</td>
+                                <td>{{ post.category.category_name }}</td>
+                                <td>{{ post.author.username }}</td>
+                                <td>{{ post.status }}</td>
+
+                                <td>
+                                    {% if post.is_featured %}
+                                        Yes
+                                    {% else %}
+                                        No
+                                    {% endif %}
+                                </td>
+<td style="white-space: nowrap; width: 170px;">
+
+    <div class="btn-group" role="group">
+<a href="{% url 'edit_post' post.id %}" class="btn btn-success btn-sm">
+    Edit
+</a>
+
+       <a href="{% url 'delete_post' post.id %}" class="btn btn-danger btn-sm">
+    Delete
+</a>
+
+    </div>
+
+</td>
+                            </tr>
+
+                            {% empty %}
+
+                            <tr>
+                                <td colspan="7" class="text-center">
+                                    No Posts Available
+                                </td>
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

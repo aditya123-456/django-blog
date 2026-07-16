@@ -78,6 +78,47 @@
 }
 
 /* ===========================
+   Dashboard Tables
+=========================== */
+
+.table{
+    width:100%;
+}
+
+.table th{
+    text-align:center;
+    vertical-align:middle;
+    font-weight:600;
+}
+
+.table td{
+    text-align:center;
+    vertical-align:middle;
+}
+
+.table th:last-child,
+.table td:last-child{
+    width:180px;
+    white-space:nowrap;
+}
+
+/* ===========================
+   Action Buttons
+=========================== */
+
+.action-buttons{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+}
+
+.action-buttons .btn{
+    min-width:70px;
+    margin:0 !important;
+}
+
+/* ===========================
    Buttons
 =========================== */
 

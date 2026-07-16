@@ -15,11 +15,11 @@
                     Dashboard
                 </a>
 
-                <a href="{% url 'categories' %}" class="list-group-item active">
+                <a href="{% url 'categories' %}" class="list-group-item">
                     Categories
                 </a>
 
-                <a href="{% url 'posts' %}" class="list-group-item">
+                <a href="{% url 'posts' %}" class="list-group-item active">
                     Posts
                 </a>
 
@@ -37,31 +37,22 @@
             <div class="card">
 
                 <div class="card-header">
-                    <h3>Edit Category</h3>
+                    <h3>Add New Post</h3>
                 </div>
 
                 <div class="card-body">
 
-                    <form method="POST">
+                    <form method="POST" enctype="multipart/form-data">
 
                         {% csrf_token %}
 
-                        <div class="form-group mb-3">
-                            <label>Category Name</label>
-
-                            <input
-                                type="text"
-                                name="category_name"
-                                class="form-control"
-                                value="{{ category.category_name }}"
-                                required>
-                        </div>
+                        {{ form.as_p }}
 
                         <button type="submit" class="btn btn-warning">
-                            Update Category
+                            Save Post
                         </button>
 
-                        <a href="{% url 'categories' %}" class="btn btn-secondary">
+                        <a href="{% url 'posts' %}" class="btn btn-secondary">
                             Cancel
                         </a>
 

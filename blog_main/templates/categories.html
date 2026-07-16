@@ -19,7 +19,7 @@
                     Categories
                 </a>
 
-              <a href="#" class="list-group-item list-group-item-action">
+            <a href="{% url 'posts' %}" class="list-group-item list-group-item-action">
     Posts
 </a>
 
@@ -74,17 +74,15 @@
 
                                 <td>{{ category.updated_at|date:"d M Y" }}</td>
 
-                                <td>
+                             <td>
+    <a href="{% url 'edit_category' category.id %}" class="btn btn-success btn-sm">
+        Edit
+    </a>
 
-                                    <a href="{% url 'edit_category' category.id %}" class="btn btn-sm btn-success">
-    Edit
-</a>
-
-                                  <a href="{% url 'delete_category' category.id %}"
-   class="btn btn-sm btn-danger">
-    Delete
-</a>
-                                </td>
+    <a href="{% url 'delete_category' category.id %}" class="btn btn-danger btn-sm">
+        Delete
+    </a>
+</td>
 
                             </tr>
 
