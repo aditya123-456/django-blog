@@ -2,98 +2,196 @@
 
 {% block content %}
 
-<!-- Page content-->
 <div class="container mt-5">
     <div class="row">
+
+        <!-- Blog Content -->
         <div class="col-lg-8">
-            <!-- Post content-->
+
             <article>
-                <!-- Post header-->
+
                 <header class="mb-4">
-                    <!-- Post title-->
-                    <h1 class="fw-bolder mb-1">{{ single_blog.title }}</h1>
-                    <!-- Post meta content-->
-                    <div class="text-muted fst-italic mb-2">Posted on {{ single_blog.created_at }} by {{ single_blog.author }}</div>
-                    <!-- Post category-->
-                    <a class="badge bg-warning text-decoration-none text-light" href="#!">{{ single_blog.category }}</a>
+
+                    <h1 class="fw-bolder mb-1">
+                        {{ single_blog.title }}
+                    </h1>
+
+                    <div class="text-muted fst-italic mb-2">
+                        Posted on {{ single_blog.created_at|date:"d M Y" }}
+                        by {{ single_blog.author }}
+                    </div>
+
+                    <span class="badge bg-warning text-dark">
+                        {{ single_blog.category }}
+                    </span>
+
                 </header>
-                <!-- Preview image figure-->
-                <figure class="mb-4"><img class="img-fluid rounded" src="{{ single_blog.featured_image.url }}" alt="..." /></figure>
-                <!-- Post content-->
+
+                <figure class="mb-4">
+                    <img class="img-fluid rounded"
+                         src="{{ single_blog.featured_image.url }}"
+                         alt="{{ single_blog.title }}">
+                </figure>
+
                 <section class="mb-5">
-                    <p class="fs-5 mb-4">{{ single_blog.short_description }}</p>
-                    <p class="fs-5 mb-4">{{ single_blog.blog_body }}</p>
+
+                    <p class="lead">
+                        {{ single_blog.short_description }}
+                    </p>
+
+                    <div class="mt-4">
+                        {{ single_blog.blog_body|safe }}
+                    </div>
+
+                    <hr>
 
                     <!-- Comments -->
-                    <h4>Comments ({{ comment_count }})</h4>
-                    {% if comments %}
-                        {% for comment in comments %}
-                            <div class="card mt-1">
-                                <div class="card-body">
-                                    <p class="card-text mb-0">{{ comment }}</p>
-                                    <span>
-                                        <small>By {{ comment.user }}</small>
-                                        <small>| {{ comment.created_at | timesince }} ago</small>
-                                    </span>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                    No comments yet.
-                    {% endif %}
-                    <br>
-                    <div class="form-group">
-                        {% if user.is_authenticated %}
-                        <form action="" method="POST">
-                            {% csrf_token %}
-                            <div class="form-group">
-                                <textarea name="comment" class="form-control" placeholder="Write your comment"></textarea>
-                                <input type="submit" value="Submit" class="btn btn-primary mt-2">
-                            </div>
 
-                        </form>
-                        {% else %}
-                        <p>Please <span><a href="{% url 'login' %}">login</a></span> to write a comment!</p>
-                        {% endif %}
+                    <h3 class="mb-4">
+                        Comments ({{ comments.count }})
+                    </h3>
+
+                    {% for comment in comments %}
+
+                    <div class="card mb-3 shadow-sm">
+
+                        <div class="card-body">
+
+                            <p class="mb-2">
+                                {{ comment.comment }}
+                            </p>
+
+                            <small class="text-muted">
+                                <strong>{{ comment.user.username }}</strong>
+                                •
+                                {{ comment.created_at|timesince }} ago
+                            </small>
+
+                        </div>
+
                     </div>
+
+                    {% empty %}
+
+                    <div class="alert alert-light">
+                        No comments yet.
+                    </div>
+
+                    {% endfor %}
+
+                    <hr>
+
+                    {% if user.is_authenticated %}
+
+                    <h4 class="mb-3">Leave a Comment</h4>
+
+                    <form method="POST">
+
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+
+                            <textarea
+                                name="comment"
+                                class="form-control"
+                                rows="4"
+                                placeholder="Write your comment..."
+                                required></textarea>
+
+                        </div>
+
+                        <button type="submit" class="btn btn-warning">
+                            Submit Comment
+                        </button>
+
+                    </form>
+
+                    {% else %}
+
+                    <div class="alert alert-info">
+
+                        <strong>Login Required</strong>
+
+                        <p class="mb-2">
+                            Only authenticated users can write comments.
+                        </p>
+
+                        <a href="{% url 'login' %}" class="btn btn-primary btn-sm">
+                            Login to Comment
+                        </a>
+
+                    </div>
+
+                    {% endif %}
 
                 </section>
+
             </article>
+
         </div>
-        <!-- Side widgets-->
+
+        <!-- Sidebar -->
+
         <div class="col-lg-4">
-            
-            <!-- Categories widget-->
-            <div class="card mb-4 p-3">
-                <h4 class="font-italic">Categories</h4>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-6">
-                           <ul class="list-unstyled mb-0">
-    {% for cat in categories %}
-        <li>
-            <a href="{% url 'post_by_category' cat.id %}">
-                {{ cat.category_name }}
-            </a>
-        </li>
-    {% endfor %}
-</ul>
-                        </div>
-                    </div>
+
+            <div class="card mb-4">
+
+                <div class="card-header">
+                    Categories
                 </div>
+
+                <div class="card-body">
+
+                    <ul class="list-unstyled mb-0">
+
+                        {% for cat in categories %}
+
+                        <li class="mb-2">
+                            <a href="{% url 'post_by_category' cat.id %}">
+                                {{ cat.category_name }}
+                            </a>
+                        </li>
+
+                        {% endfor %}
+
+                    </ul>
+
+                </div>
+
             </div>
-            <!-- Side widget-->
+
             {% if social_links %}
-            <div class="card mb-4 p-3">
-                <h4 class="font-italic">Follow Us</h4>
-                <ol class="list-unstyled">
-                    {% for i in social_links %}
-                    <li><a href="{{ i.link }}" target="_blank">{{ i.platform }}</a></li>
-                    {% endfor %}
-                </ol>
+
+            <div class="card">
+
+                <div class="card-header">
+                    Follow Us
+                </div>
+
+                <div class="card-body">
+
+                    <ul class="list-unstyled mb-0">
+
+                        {% for i in social_links %}
+
+                        <li class="mb-2">
+                            <a href="{{ i.link }}" target="_blank">
+                                {{ i.platform }}
+                            </a>
+                        </li>
+
+                        {% endfor %}
+
+                    </ul>
+
+                </div>
+
             </div>
+
             {% endif %}
+
         </div>
+
     </div>
 </div>
 

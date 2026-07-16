@@ -33,7 +33,12 @@ class Blog(models.Model):
     short_description = models.TextField(max_length=500)
     blog_body = models.TextField(max_length=2000)
 
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="Draft")
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default="Draft"
+    )
+
     is_featured = models.BooleanField(default=False)
 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -57,3 +62,28 @@ class Blog(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Comment(models.Model):
+
+    blog = models.ForeignKey(
+        Blog,
+        on_delete=models.CASCADE,
+        related_name="comments"
+    )
+
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
+
+    comment = models.TextField(max_length=250)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.user.username} - {self.blog.title}"
