@@ -11,26 +11,29 @@
 
             <div class="list-group">
 
-                <a href="{% url 'dashboard' %}"
-                   class="list-group-item list-group-item-action active">
-                    Dashboard
-                </a>
+               <a href="{% url 'dashboard' %}" class="list-group-item">
+    Dashboard
+</a>
 
-                <a href="{% url 'categories' %}"
-                   class="list-group-item list-group-item-action">
-                    Categories
-                </a>
+{% if request.user.is_superuser or request.user.groups.all.0.name == "Manager" %}
 
-                <a href="#"
-                   class="list-group-item list-group-item-action">
-                    Blogs
-                </a>
 
-                <a href="{% url 'logout' %}"
-                   class="list-group-item list-group-item-action text-danger">
-                    Logout
-                </a>
+<a href="{% url 'users' %}" class="list-group-item list-group-item-action">
+    Users
+</a>
+{% endif %}
+<a href="{% url 'categories' %}" class="list-group-item list-group-item-action">
+    Categories
+</a>
 
+<a href="{% url 'posts' %}" class="list-group-item list-group-item-action">
+    Posts
+</a>
+
+
+<a href="{% url 'logout' %}" class="list-group-item text-danger">
+    Logout
+</a>
             </div>
 
         </div>
