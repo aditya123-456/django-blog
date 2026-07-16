@@ -15,7 +15,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+
 from blog_main import views
 from blogs import views as blog_views
 
@@ -30,4 +33,11 @@ urlpatterns = [
     path('search/', blog_views.search, name='search'),
     path('category/<int:category_id>/', blog_views.post_by_category, name='post_by_category'),
     path('blog/<slug:slug>/', blog_views.blogs, name='blogs'),
+
+    # Dashboard
+    path('dashboard/', include('dashboard.urls')),
 ]
+
+# Serve uploaded media files during development
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,93 +1,102 @@
-/* stylelint-disable selector-list-comma-newline-after */
+/* ===========================
+   Category Navigation
+=========================== */
 
-.blog-header {
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.blog-header-logo {
-  font-family: "Playfair Display", Georgia, "Times New Roman", serif/*rtl:Amiri, Georgia, "Times New Roman", serif*/;
-  font-size: 2.25rem;
-}
-
-.blog-header-logo:hover {
-  text-decoration: none;
+.category-nav{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:35px;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: "Playfair Display", Georgia, "Times New Roman", serif/*rtl:Amiri, Georgia, "Times New Roman", serif*/;
+.category-link{
+    color:#555 !important;
+    font-size:18px;
+    font-weight:500;
+    padding:10px 0 !important;
+    text-decoration:none;
 }
 
-.display-4 {
-  font-size: 2.5rem;
-}
-@media (min-width: 768px) {
-  .display-4 {
-    font-size: 3rem;
-  }
+.category-link:hover{
+    color:#ffc107 !important;
 }
 
-.flex-auto {
-  flex: 0 0 auto;
+/* ===========================
+   Dashboard Sidebar
+=========================== */
+
+.dashboard-sidebar .list-group{
+    border-radius:4px;
+    overflow:hidden;
 }
 
-.h-250 { height: 250px; }
-@media (min-width: 768px) {
-  .h-md-250 { height: 250px; }
+.dashboard-sidebar .list-group-item{
+    padding:14px 20px;
+    font-size:17px;
+    border:1px solid #e5e5e5;
 }
 
-/* Pagination */
-.blog-pagination {
-  margin-bottom: 4rem;
+.dashboard-sidebar .list-group-item.active{
+    background:#ffc107 !important;
+    border-color:#ffc107 !important;
+    color:#fff !important;
 }
 
-/*
- * Blog posts
- */
-.blog-post {
-  margin-bottom: 4rem;
-}
-.blog-post-title {
-  font-size: 2.5rem;
-}
-.blog-post-meta {
-  margin-bottom: 1.25rem;
-  color: #727272;
+.dashboard-sidebar .list-group-item:hover{
+    background:#ffc107;
+    color:#fff;
 }
 
-/*
- * Footer
- */
-.blog-footer {
-  padding: 2.5rem 0;
-  color: #727272;
-  text-align: center;
-  background-color: #f9f9f9;
-  border-top: .05rem solid #e5e5e5;
-}
-.blog-footer p:last-child {
-  margin-bottom: 0;
-}
-/* Cricket Banner */
+/* ===========================
+   Dashboard Cards
+=========================== */
 
-.cricket-banner{
-    background-image:
-        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-        url("images/cricket-batand-ball-illustration-xp7hl49ke5b8c17x.webp");
-
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-
-    min-height: 500px;
-    display: flex;
-    align-items: center;
-    color: white;
-}
-.cricket-banner h1{
-    font-size: 3.5rem;
-    font-weight: bold;
+.dashboard-card{
+    border:1px solid #ddd;
+    border-radius:4px;
+    box-shadow:0 2px 6px rgba(0,0,0,.08);
+    margin-bottom:20px;
 }
 
-.cricket-banner p{
-    font-size: 1.25rem;
+.dashboard-card .card-header{
+    background:#f8f9fa;
+    font-size:18px;
+    font-weight:bold;
+    text-transform:uppercase;
+    text-align:center;
+}
+
+.dashboard-card .card-body{
+    padding:30px;
+    text-align:center;
+}
+
+.dashboard-card h2{
+    font-size:40px;
+    font-weight:bold;
+    margin:0;
+}
+
+/* ===========================
+   Buttons
+=========================== */
+
+.btn-warning{
+    color:#000;
+}
+
+.btn-warning:hover{
+    color:#000;
+}
+
+/* ===========================
+   Search
+=========================== */
+
+.form-control{
+    height:46px;
+}
+
+.btn-primary{
+    height:46px;
 }
