@@ -185,22 +185,6 @@ Install dependencies:
 pip install -r requirements.txt
 ```
 
----
-
-## 📈 Future Improvements
-
-- Rich Text Editor
-- User Profile Page
-- Blog Likes
-- Tags
-- Email Verification
-- Password Reset
-- Pagination
-- REST API
-- Dark Mode
-
----
-
 ## 👨‍💻 Author
 
 **Aditya**
